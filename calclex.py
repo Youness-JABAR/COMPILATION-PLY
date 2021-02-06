@@ -121,7 +121,7 @@ t_MADAM = r'madam'
 t_DIR = r'dir'
 t_MNGHIRDAKCHI = r'manghirdakchi'
 t_OLA = r'ola'
-t_ILA = r'if'
+t_ILA = r'ila'
 t_TUSSAWI = r'\='
 
 
@@ -161,17 +161,9 @@ def t_COMMENT(t):
     pass
     # No return value. Token discarded
 
-literals = [ '{', '}' ]
+#literals = [ '{', '}' ]
 
-def t_lbrace(t):
-    r'\{'
-    t.type = '{'      # Set token type to the expected literal
-    return t
 
-def t_rbrace(t):
-    r'\}'
-    t.type = '}'      # Set token type to the expected literal
-    return t
 
 
 # Compute column.

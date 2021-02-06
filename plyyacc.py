@@ -37,7 +37,7 @@ def p_statement(p):
 def p_assignement(p):
     'assignement : ID TUSSAWI expression_string NO9TAFASSILA'
     variables.update({p[1] : p[3]})
-    print(variables)
+
 def p_expression_string(p):
     #'assignement : expression TUSSAWI expression| expression_string '
     ''' expression_string : expression
@@ -52,15 +52,24 @@ def p_printing(p):
     p[0] = p[3]
 
 def p_statement_if(p):
-    '''statement : ILA 7EL9AWESS boolean SED9AWESS statement
+    '''statement : ILA 7EL9AWESS boolean SED9AWESS 7ELLAMA statements SEDLAMA
                     | ILA 7EL9AWESS boolean SED9AWESS statement MNGHIRDAKCHI statement'''
     if p[3]:
-        p[0] = p[5]
+        p[0] = p[6]
     else:
         if p[7] is not None:
             p[0] = p[7]
 
+    def p_statement_while(p):
+        'statement : MADAM 7EL9AWESS boolean SED9AWESS 7ELLAMA statements SEDLAMA'
+        while p[3]:
+            print("hnaaaaaaaaaaaaaaaaaa")
+            print(p[3])
 
+            p[0] = p[6]
+def p_expression_paren(p):
+    'expression : 7EL9AWESS expression SED9AWESS'
+    p[0] = p[2]
 def p_expression_plus(p):
     #'expression : RA9M ZA2ID RA9M'
     'expression : expression ZA2ID term'
@@ -90,6 +99,11 @@ def p_term_ID(p):
     'term : ID'
     p[0] = variables[p[1]]
 
+
+
+
+
+
 def p_term_factor(p):
     'term : factor'
     p[0] = p[1]
@@ -108,25 +122,77 @@ def p_boolean(p):
     '''
     p[0] = p[1]
 
+
 def p_comparison(p):
-    '''boolean : expression YUSSAWI2 expression
+    '''boolean : ID YUSSAWI2 boolean
+                          | ID MAKAYSSAWICH boolean
+                          | boolean YUSSAWI2 ID
+                          | boolean MAKAYSSAWICH ID
+                          | ID YUSSAWI2 ID
+                          | ID MAKAYSSAWICH ID
+                          | boolean YUSSAWI2 boolean
+                          | boolean MAKAYSSAWICH boolean
+                          | expression YUSSAWI2 expression
                           | expression MAKAYSSAWICH expression
                           | expression KTERMN expression
                           | expression 9ELMN expression
                           | expression KTERYUSSAWI expression
                           | expression 9ELYUSSAWI expression'''
     if p[2] == '==':
-        p[0] = p[1] == p[3]
+        if variables.get(p[1])!=None and variables.get(p[3])==None:
+            p[0] = variables[p[1]] == p[3]
+        elif variables.get(p[1])==None and variables.get(p[3])!=None:
+            p[0] =  p[1]== variables[p[3]]
+        elif variables.get(p[1])!=None and variables.get(p[3])!=None:
+            p[0] =  variables[p[1]]== variables[p[3]]
+        else:
+            p[0] = p[1] == p[3]
     elif p[2] == '!=':
-        p[0] = p[1] != p[3]
+        if variables.get(p[1]) != None and variables.get(p[3]) == None:
+            p[0] = variables[p[1]] != p[3]
+        elif variables.get(p[1]) == None and variables.get(p[3]) != None:
+            p[0] = p[1] != variables[p[3]]
+        elif variables.get(p[1]) != None and variables.get(p[3]) != None:
+            p[0] = variables[p[1]] != variables[p[3]]
+        else:
+            p[0] = p[1] != p[3]
     elif p[2] == '>':
-        p[0] = p[1] > p[3]
+        if variables.get(p[1]) != None and variables.get(p[3]) == None:
+            p[0] = variables[p[1]] > p[3]
+        elif variables.get(p[1]) == None and variables.get(p[3]) != None:
+            p[0] = p[1] > variables[p[3]]
+        elif variables.get(p[1]) != None and variables.get(p[3]) != None:
+            p[0] = variables[p[1]] > variables[p[3]]
+        else:
+            p[0] = p[1] > p[3]
     elif p[2] == '<':
-        p[0] = p[1] < p[3]
+
+        if variables.get(p[1]) != None and variables.get(p[3]) == None:
+            p[0] = variables[p[1]] < p[3]
+        elif variables.get(p[1]) == None and variables.get(p[3]) != None:
+            p[0] = p[1] < variables[p[3]]
+        elif variables.get(p[1]) != None and variables.get(p[3]) != None:
+            p[0] = variables[p[1]] < variables[p[3]]
+        else:
+            p[0] = p[1] < p[3]
     elif p[2] == '>=':
-        p[0] = p[1] >= p[3]
+        if variables.get(p[1]) != None and variables.get(p[3]) == None:
+            p[0] = variables[p[1]] >= p[3]
+        elif variables.get(p[1]) == None and variables.get(p[3]) != None:
+            p[0] = p[1] >= variables[p[3]]
+        elif variables.get(p[1]) != None and variables.get(p[3]) != None:
+            p[0] = variables[p[1]] >= variables[p[3]]
+        else:
+            p[0] = p[1] >= p[3]
     elif p[2] == '<=':
-        p[0] = p[1] <= p[3]
+        if variables.get(p[1]) != None and variables.get(p[3]) == None:
+            p[0] = variables[p[1]] <= p[3]
+        elif variables.get(p[1]) == None and variables.get(p[3]) != None:
+            p[0] = p[1] <= variables[p[3]]
+        elif variables.get(p[1]) != None and variables.get(p[3]) != None:
+            p[0] = variables[p[1]] <= variables[p[3]]
+        else:
+            p[0] = p[1] <= p[3]
 
 # Error rule for syntax errors
 def p_error(p):

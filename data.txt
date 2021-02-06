@@ -1,10 +1,15 @@
-kteb(2+3*(5%4)); kteb(2+3*(5%4));
-a=ghalat;
-kteb(a);
-ila(5<9)
-    kteb("ouiii");
-manghirdakchi
-    kteb("NOOO");
+
+a=1;
+kteb(a<2);
+
+madam(a<2)
+{
+kteb("ouiiii");
+a=a+1;
+}
+
+
+
 
 
 
