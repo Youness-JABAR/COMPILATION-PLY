@@ -12,11 +12,20 @@ import ply.lex as lex
 import ply.yacc as yacc
 import calclex
 tokens = calclex.tokens
-
+variables={}
 # Get the token map from the lexer.  This is required.
 #from calclex import tokens
 
-# ila statement
+def p_statements(p):
+    ''' statements : statements statement
+                   | statement
+    '''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[2]]
+
+
 
 def p_statement(p):
     '''statement : assignement
@@ -25,23 +34,25 @@ def p_statement(p):
 
 
 
-def p_affecter(p):
-    'assignement : ID TUSSAWI expression_string'
-    p[0] = p[3]
+def p_assignement(p):
+    'assignement : ID TUSSAWI expression_string NO9TAFASSILA'
+    variables.update({p[1] : p[3]})
+    print(variables)
 def p_expression_string(p):
     #'assignement : expression TUSSAWI expression| expression_string '
     ''' expression_string : expression
-                            | STRING'''
+                            | STRING
+                            |ID_value'''
     p[0] = p[1]
+def p_ID_value(p):
+    'ID_value : ID'
+    p[0] = variables[p[1]]
+
 
 def p_printing(p):
-    'printing : KTEB 7EL9AWESS expression_string SED9AWESS'
+    'printing : KTEB 7EL9AWESS expression_string SED9AWESS NO9TAFASSILA'
     p[0] = p[3]
 
-def p_assignement(p):
-    #'expression : RA9M ZA2ID RA9M'
-    'assignement : ID TUSSAWI expression'
-    p[0] = p[3]
 
 def p_expression_plus(p):
     #'expression : RA9M ZA2ID RA9M'
@@ -87,7 +98,7 @@ def p_error(p):
 # Build the parser
 parser = yacc.yacc()
 
-
+#data = open('file.txt').read().replace('\n', '')
 filename=sys.argv[1]
 file_handle=open(filename,"r")
 file_contents=file_handle.read()
@@ -100,7 +111,8 @@ while True:
     if not tok:
         break      # No more input
     print(tok)
-print(result)
+for r in result:
+    print(r)
 
 while True:
    try:
