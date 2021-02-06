@@ -41,12 +41,9 @@ def p_assignement(p):
 def p_expression_string(p):
     #'assignement : expression TUSSAWI expression| expression_string '
     ''' expression_string : expression
-                            | STRING
-                            |ID_value'''
+                            | STRING'''
     p[0] = p[1]
-def p_ID_value(p):
-    'ID_value : ID'
-    p[0] = variables[p[1]]
+
 
 
 def p_printing(p):
@@ -79,17 +76,23 @@ def p_term_div(p):
     'term : term 9SSEM factor'
     p[0] = p[1] / p[3]
 
+def p_term_ID(p):
+    'term : ID'
+    p[0] = variables[p[1]]
+
 def p_term_factor(p):
     'term : factor'
-    p[0] = p[1]
-
-def p_factor_num(p):
-    'factor : RA9M'
     p[0] = p[1]
 
 def p_factor_expr(p):
     'factor : 7EL9AWESS expression SED9AWESS'
     p[0] = p[2]
+
+def p_factor_num(p):
+    'factor : RA9M'
+    p[0] = p[1]
+
+
 
 # Error rule for syntax errors
 def p_error(p):
