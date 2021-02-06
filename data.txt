@@ -1,6 +1,2 @@
-2=2+=aez if FOR
+2+3*(5-4)
 
-   8  BSSE7
-   #ZEREZER
-   " "
-   ;

@@ -6,15 +6,21 @@
 # ------------------------------------------------------------
 import sys
 
+from ply import lex
+
+from ply import *
+
 import ply.lex as lex
 
 # List of token names.   This is always required
 tokens = [
+   'STRING',
    'RA9M',
    'ZA2ID',
    'NA9ISS',
    'DREB',
    '9SSEM',
+   'BA9IL9ISSMA',
    'ID',
     'TUSSAWI',
     '7EL9AWESS',
@@ -27,6 +33,13 @@ tokens = [
     'NO9TA',
     'NO9TAFASSILA',
     'JUJNO9AT',
+
+    '9ELMN',
+    '9ELYUSSAWI',
+    'KTERMN',
+    'KTERYUSSAWI',
+    'YUSSAWI2',
+    'MAKAYSSAWICH',
 
 ]
 
@@ -62,6 +75,13 @@ reserved = {
 }
 #the name following the t_ must exactly match one of the names supplied in tokens
 # Regular expression rules for simple tokens
+
+t_9ELMN               = r'<'
+t_KTERMN               = r'>'
+t_9ELYUSSAWI               = r'<='
+t_KTERYUSSAWI               = r'>='
+t_YUSSAWI2               = r'=='
+t_MAKAYSSAWICH               = r'!='
 # Delimeters
 t_7EL9AWESS          = r'\('
 t_SED9AWESS           = r'\)'
@@ -92,6 +112,7 @@ t_ZA2ID    = r'\+'
 t_NA9ISS   = r'-'
 t_DREB   = r'\*'
 t_9SSEM  = r'/'
+t_BA9IL9ISSMA  = r'%'
 t_LIKUL   = r'likul'
 t_FI   = r'fi'
 t_DKHEL = r'dkhel'
@@ -109,8 +130,14 @@ tokens =tokens +list(reserved.values())
 # A regular expression rule with some action code
 
 
+def t_STRING(t):
+    r'"[^"]*"'
+    t.value = t.value[1:len(t.value) - 1]
+    return t
+
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
+
     t.type = reserved.get(t.value,'ID')    # Check for reserved words
 
     return t
@@ -171,26 +198,14 @@ def t_eof(t):
      #   lexer.input(more)
       #  return lexer.token()
     #return None
-    print("\n ********************** end of file :)")
-
+    #print("\n ********************** end of file :)")
+    print("")
 
 
 #to read the regular expression rules out of the calling context and build the lexer.
 lexer = lex.lex(debug=True)
 
 
-# Give the lexer some input
-filename=sys.argv[1]
-file_handle=open(filename,"r")
-file_contents=file_handle.read()
-lexer.input(file_contents)
 
-# Tokenize
-while True:
-    # lexer.token() :Returns a special LexToken instance on success or None if the end of the input text has been reached.
-    tok = lexer.token()
-    if not tok:
-        break      # No more input
-    print(tok)
 
     #print(tok.type, tok.value, tok.lineno, tok.lexpos)
