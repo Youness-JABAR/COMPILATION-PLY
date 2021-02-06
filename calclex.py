@@ -96,8 +96,7 @@ t_JUJNO9AT            = r':'
 
 t_MSSE7    = r'msse7'
 t_WALO    = r'walo'
-t_GHALAT    = r'ghalat'
-t_S7I7    = r's7i7'
+
 t_SENF    = r'senf'
 t_CHED    = r'ched'
 t_JREB    = r'jreb'
@@ -129,6 +128,15 @@ t_TUSSAWI = r'\='
 tokens =tokens +list(reserved.values())
 # A regular expression rule with some action code
 
+def t_S7I7(t):
+    r's7i7'
+    t.value = True
+    return t
+
+def t_GHALAT(t):
+    r'ghalat'
+    t.value = False
+    return t
 
 def t_STRING(t):
     r'"[^"]*"'
