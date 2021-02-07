@@ -79,7 +79,7 @@ def p_expression_negatif(t):
 
 def p_statement_if(p):
     '''statement : ILA 7EL9AWESS boolean SED9AWESS 7ELLAMA statements SEDLAMA
-                    | ILA 7EL9AWESS boolean SED9AWESS statement MNGHIRDAKCHI statement'''
+                    | ILA 7EL9AWESS boolean SED9AWESS statement MANGHIRDAKCHI statement'''
     if p[3]:
         p[0] = p[6]
     else:
