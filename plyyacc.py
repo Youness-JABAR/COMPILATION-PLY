@@ -147,6 +147,7 @@ def p_boolean(p):
 def p_comparison(p):
     '''boolean : ID YUSSAWI2 boolean
                           | ID YUSSAWI2 expression
+                          | ID MAKAYSSAWICH expression
                           | ID MAKAYSSAWICH boolean
                           | boolean YUSSAWI2 ID
                           | boolean MAKAYSSAWICH ID
@@ -159,7 +160,11 @@ def p_comparison(p):
                           | expression KTERMN expression
                           | expression 9ELMN expression
                           | expression KTERYUSSAWI expression
-                          | expression 9ELYUSSAWI expression'''
+                          | expression 9ELYUSSAWI expression
+                          | expression KTERMN ID
+                          | expression 9ELMN ID
+                          | expression KTERYUSSAWI ID
+                          | expression 9ELYUSSAWI ID'''
     if p[2] == '==':
         if variables.get(p[1]) != None and variables.get(p[3]) == None:
             p[0] = variables[p[1]] == p[3]
