@@ -1,14 +1,20 @@
+a=12;
+kteb(a);
+a+=1;
+kteb(a);
+a-=1;
+kteb(a);
+a*=2;
+kteb(a);
+a/=2;
+kteb(a);
 
-a=1;
-kteb(a<2);
-
-madam(a<2)
-{
-kteb("ouiiii");
-a=a+1;
-}
-
-
+a++;
+kteb(a);
+a--;
+a--;
+a--;
+kteb(a);
 
 
 

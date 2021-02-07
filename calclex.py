@@ -21,6 +21,12 @@ tokens = [
    'DREB',
    '9SSEM',
    'BA9IL9ISSMA',
+   'ZIDFIH',
+    'N9ESSFIH',
+    'DREBFIH',
+    '9SSEMFIH',
+    'ZIDWA7ED',
+    'N9ESSWA7ED',
    'ID',
     'TUSSAWI',
     '7EL9AWESS',
@@ -40,7 +46,6 @@ tokens = [
     'KTERYUSSAWI',
     'YUSSAWI2',
     'MAKAYSSAWICH',
-
 ]
 
 
@@ -48,7 +53,7 @@ reserved = {
     'ila' : 'ILA',                              #IF
     'idan' : 'IDAN',                            #then
     'ola' : 'OLA',                              #if else
-    'manghirdakchi' : 'MNGHIRDAKCHI',           #else
+    'manghirdakchi' : 'MANGHIRDAKCHI',           #else
     'madam' : 'MADAM',                          #WHILE
     'dir': 'DIR',                               #DO
     'likul'    : 'LIKUL',                       #FOR
@@ -69,10 +74,8 @@ reserved = {
     'ghalat'  : 'GHALAT',                       #FALSE
     'walo'  : 'WALO',                           #NONE
     'msse7'  : 'MSSE7',                         #DEL
-
-
-
 }
+
 #the name following the t_ must exactly match one of the names supplied in tokens
 # Regular expression rules for simple tokens
 
@@ -94,6 +97,7 @@ t_NO9TA           = r'\.'
 t_NO9TAFASSILA             = r';'
 t_JUJNO9AT            = r':'
 
+
 t_MSSE7    = r'msse7'
 t_WALO    = r'walo'
 
@@ -112,6 +116,12 @@ t_NA9ISS   = r'-'
 t_DREB   = r'\*'
 t_9SSEM  = r'/'
 t_BA9IL9ISSMA  = r'%'
+t_ZIDFIH = r'\+='
+t_N9ESSFIH = r'-='
+t_DREBFIH = r'\*='
+t_9SSEMFIH = r'/='
+t_ZIDWA7ED = r'\++'
+t_N9ESSWA7ED = r'--'
 t_LIKUL   = r'likul'
 t_FI   = r'fi'
 t_DKHEL = r'dkhel'
