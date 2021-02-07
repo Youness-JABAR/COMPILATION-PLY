@@ -1,21 +1,13 @@
-a=12;
-kteb(a);
-a+=1;
-kteb(a);
-a-=1;
-kteb(a);
-a*=2;
-kteb(a);
-a/=2;
-kteb(a);
 
-a++;
-kteb(a);
-a--;
-a--;
-a--;
-kteb(a);
-
-
+a=2;
+b=2;
+ila ( a == 3)
+{
+kteb("oui");
+}
+manghirdakchi
+{
+kteb("non");
+}
 
 

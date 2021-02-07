@@ -72,19 +72,15 @@ def p_printing(p):
     'printing : KTEB 7EL9AWESS expression_string SED9AWESS NO9TAFASSILA'
     p[0] = p[3]
 
-def p_expression_negatif(t):
-    '''expression : NA9ISS expression
-                    |NA9ISS expression NO9TAFASSILA'''
-    t[0] = -t[2]
-
 def p_statement_if(p):
     '''statement : ILA 7EL9AWESS boolean SED9AWESS 7ELLAMA statements SEDLAMA
-                    | ILA 7EL9AWESS boolean SED9AWESS statement MANGHIRDAKCHI statement'''
+                    | ILA 7EL9AWESS boolean SED9AWESS 7ELLAMA statement SEDLAMA MANGHIRDAKCHI 7ELLAMA statement SEDLAMA'''
     if p[3]:
         p[0] = p[6]
+
     else:
-        if p[7] is not None:
-            p[0] = p[7]
+        if p[10] is not None:
+            p[0] = p[10]
 
 def p_statement_while(p):
     'statement : MADAM 7EL9AWESS boolean SED9AWESS 7ELLAMA statements SEDLAMA'
@@ -150,6 +146,7 @@ def p_boolean(p):
 
 def p_comparison(p):
     '''boolean : ID YUSSAWI2 boolean
+                          | ID YUSSAWI2 expression
                           | ID MAKAYSSAWICH boolean
                           | boolean YUSSAWI2 ID
                           | boolean MAKAYSSAWICH ID
@@ -164,12 +161,12 @@ def p_comparison(p):
                           | expression KTERYUSSAWI expression
                           | expression 9ELYUSSAWI expression'''
     if p[2] == '==':
-        if variables.get(p[1])!=None and variables.get(p[3])==None:
+        if variables.get(p[1]) != None and variables.get(p[3]) == None:
             p[0] = variables[p[1]] == p[3]
-        elif variables.get(p[1])==None and variables.get(p[3])!=None:
-            p[0] =  p[1]== variables[p[3]]
-        elif variables.get(p[1])!=None and variables.get(p[3])!=None:
-            p[0] =  variables[p[1]]== variables[p[3]]
+        elif variables.get(p[1]) == None and variables.get(p[3]) != None:
+            p[0] = p[1] == variables[p[3]]
+        elif variables.get(p[1]) != None and variables.get(p[3]) != None:
+            p[0] = variables[p[1]] == variables[p[3]]
         else:
             p[0] = p[1] == p[3]
     elif p[2] == '!=':
