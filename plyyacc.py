@@ -26,7 +26,6 @@ def p_statements(p):
         p[0] = p[1] + [p[2]]
 
 
-
 def p_statement(p):
     '''statement : assignement
                 | printing'''
