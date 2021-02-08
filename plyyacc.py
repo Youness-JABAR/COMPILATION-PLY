@@ -81,10 +81,28 @@ def p_statement_if(p):
         if p[10] is not None:
             p[0] = p[10]
 
+
+
 def p_statement_while(p):
-    'statement : MADAM 7EL9AWESS boolean SED9AWESS 7ELLAMA statements SEDLAMA'
-    while p[3]:
-        p[0] = p[6]
+    'statement : loop_while'
+    p[0]=p[1]
+
+
+def p_loop_while(p):
+    'loop_while : MADAM 7EL9AWESS boolean SED9AWESS 7ELLAMA statements  SEDLAMA'
+
+    i=0
+    ret=[]
+    while(p[3]):
+        #print("true")
+        ret.append(p[6])
+        i=i+1
+        if (i==10):
+            print("ereur : boucle infini")
+            print(variables)
+            break
+    p[0] = ret
+
 
 
 
@@ -144,26 +162,43 @@ def p_boolean(p):
 
 
 def p_comparison(p):
-    '''boolean : ID YUSSAWI2 boolean
-                          | ID YUSSAWI2 expression
-                          | ID MAKAYSSAWICH expression
+    '''boolean :            boolean YUSSAWI2 boolean
+                          | boolean MAKAYSSAWICH boolean
+
+                          | ID YUSSAWI2 boolean
                           | ID MAKAYSSAWICH boolean
+
                           | boolean YUSSAWI2 ID
                           | boolean MAKAYSSAWICH ID
+
                           | ID YUSSAWI2 ID
                           | ID MAKAYSSAWICH ID
-                          | boolean YUSSAWI2 boolean
-                          | boolean MAKAYSSAWICH boolean
+                          | ID KTERMN ID
+                          | ID 9ELMN ID
+                          | ID KTERYUSSAWI ID
+                          | ID 9ELYUSSAWI ID
+
+                          | expression YUSSAWI2 ID
+                          | expression MAKAYSSAWICH ID
+                          | expression KTERMN ID
+                          | expression 9ELMN ID
+                          | expression KTERYUSSAWI ID
+                          | expression 9ELYUSSAWI ID
+
+                          | ID YUSSAWI2 expression
+                          | ID MAKAYSSAWICH expression
+                          | ID KTERMN expression
+                          | ID 9ELMN expression
+                          | ID KTERYUSSAWI expression
+                          | ID 9ELYUSSAWI expression
+
                           | expression YUSSAWI2 expression
                           | expression MAKAYSSAWICH expression
                           | expression KTERMN expression
                           | expression 9ELMN expression
                           | expression KTERYUSSAWI expression
                           | expression 9ELYUSSAWI expression
-                          | expression KTERMN ID
-                          | expression 9ELMN ID
-                          | expression KTERYUSSAWI ID
-                          | expression 9ELYUSSAWI ID'''
+                          '''
     if p[2] == '==':
         if variables.get(p[1]) != None and variables.get(p[3]) == None:
             p[0] = variables[p[1]] == p[3]
@@ -243,11 +278,3 @@ while True:
 for r in result:
     print(r)
 
-while True:
-   try:
-       s = input('calc > ')
-   except EOFError:
-       break
-   if not s: continue
-   result = parser.parse(s)
-   print(result)
