@@ -131,7 +131,6 @@ def p_statement_while(p):
     'statement : loop_while'
     p[0]=p[1]
 
-
 def p_loop_while(p):
     'loop_while : MADAM 7EL9AWESS boolean SED9AWESS 7ELLAMA statements  SEDLAMA'
 
@@ -164,8 +163,9 @@ def p_term_RA9M_salib(p):
 def p_expression_paren(p):
     'expression : 7EL9AWESS expression SED9AWESS'
     p[0] = p[2]
+
 def p_expression_plus(p):
-    ' expression : expression ZA2ID term '
+    'expression : expression ZA2ID term'
     p[0] = p[1] + p[3]
 
 def p_expression_minus(p):
@@ -346,5 +346,8 @@ while True:
         break      # No more input
     print(tok)'''
 for r in result:
-    print(r)
+    if r == None:
+        continue;
+    else:
+        print(r)
 

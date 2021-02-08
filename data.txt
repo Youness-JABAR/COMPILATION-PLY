@@ -1,6 +1,11 @@
 
 A=-4;
-B=3;
+B=6;
+B=4+2;
+kteb(B);
+C=5;
+C++;
+kteb(C);
 kteb(A/B);
 ila(A/B>0){
    kteb("POSITIF");
