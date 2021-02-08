@@ -71,10 +71,32 @@ def p_printing(p):
     'printing : KTEB 7EL9AWESS expression_string SED9AWESS NO9TAFASSILA'
     p[0] = p[3]
 
+def p_elif2(p):
+    '''olas : olas ola
+              | ola
+              | olas ola2'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[2]]
+
+
+def p_elif(p):
+    'ola : OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA'
+    if p[3]:
+        p[0]=p[6]
+
+def p_elif3(p):
+    'ola2 : OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA MANGHIRDAKCHI 7ELLAMA statements SEDLAMA'
+    if p[3]:
+        p[0]=p[6]
+    else:
+        p[0]=p[10]
+
 def p_statement_if(p):
     '''statement : ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA
-                   | ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA
-                    '''
+                   | ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA olas
+                   '''
     if len(p) == 8:
         if p[3]:
             p[0] = p[6]
@@ -82,12 +104,12 @@ def p_statement_if(p):
         if p[3]:
             p[0] = p[6]
         else:
-            if p[10]:
-                p[0] = p[13]
+            p[0] = p[8]
+
 
 def p_statement_else(p):
     '''statement : ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA MANGHIRDAKCHI 7ELLAMA statements SEDLAMA
-                | ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA MANGHIRDAKCHI 7ELLAMA statements SEDLAMA
+                | ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA ola2
                  '''
 
     if len(p) == 12:
@@ -100,15 +122,8 @@ def p_statement_else(p):
     else:
         if p[3]:
             p[0] = p[6]
-        elif p[10]:
-             p[0] = p[13]
         else:
-            p[0] = p[17]
-
-
-
-
-
+            p[0] = p[8]
 
 def p_statement_while(p):
     'statement : loop_while'
@@ -311,13 +326,13 @@ file_handle=open(filename,"r")
 file_contents=file_handle.read()
 result = parser.parse(file_contents)
 # Tokenize
-calclex.lexer.input(file_contents)
+'''calclex.lexer.input(file_contents)
 while True:
     # lexer.token() :Returns a special LexToken instance on success or None if the end of the input text has been reached.
     tok =calclex.lexer.token()
     if not tok:
         break      # No more input
-    print(tok)
+    print(tok)'''
 for r in result:
     print(r)
 

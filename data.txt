@@ -1,22 +1,26 @@
 
 a=1;
 b=3;
+a+=2;
+kteb(a);
 
 
+ila(2==1){
+   kteb("ila1");
+    }
+ola(1==2){
+    kteb("ola 1");
+    }
+ola(1==2){
+    kteb("ola 1");
+    }
+ola(2==2){
+    kteb("weeeeeee");
+    }
+manghirdakchi{
+    kteb("ola 2");
+    }
 
-
-ila(2==1)
-{
-kteb("non");
-}
-ola((3==3 wa 4==2) aw 2==1)
-{
-kteb("eee");
-}
-manghirdakchi
-{
-kteb("fffff");
-}
 
 
 
