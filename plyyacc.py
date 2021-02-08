@@ -72,14 +72,41 @@ def p_printing(p):
     p[0] = p[3]
 
 def p_statement_if(p):
-    '''statement : ILA 7EL9AWESS boolean SED9AWESS 7ELLAMA statements SEDLAMA
-                    | ILA 7EL9AWESS boolean SED9AWESS 7ELLAMA statement SEDLAMA MANGHIRDAKCHI 7ELLAMA statement SEDLAMA'''
-    if p[3]:
-        p[0] = p[6]
-
+    '''statement : ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA
+                   | ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA
+                    '''
+    if len(p) == 8:
+        if p[3]:
+            p[0] = p[6]
     else:
-        if p[10] is not None:
-            p[0] = p[10]
+        if p[3]:
+            p[0] = p[6]
+        else:
+            if p[10]:
+                p[0] = p[13]
+
+def p_statement_else(p):
+    '''statement : ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA MANGHIRDAKCHI 7ELLAMA statements SEDLAMA
+                | ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA MANGHIRDAKCHI 7ELLAMA statements SEDLAMA
+                 '''
+
+    if len(p) == 12:
+        if p[3]:
+            p[0] = p[6]
+
+        else:
+            if p[10] is not None:
+                p[0] = p[10]
+    else:
+        if p[3]:
+            p[0] = p[6]
+        elif p[10]:
+             p[0] = p[13]
+        else:
+            p[0] = p[17]
+
+
+
 
 
 
@@ -159,6 +186,22 @@ def p_boolean(p):
                 | GHALAT
     '''
     p[0] = p[1]
+
+def p_comparison2(p):
+    r'''booleans :            booleans WA boolean
+                              | booleans AW boolean
+                              | boolean
+                              | 7EL9AWESS booleans SED9AWESS
+
+                              '''
+    if len(p) == 2:
+        p[0] = p[1]
+    elif p[2]=="wa":
+        p[0] = p[1] and p[3]
+    elif p[2]=="aw":
+        p[0] = p[1] or p[3]
+    elif p[1]=='(':
+        p[0] = p[2]
 
 
 def p_comparison(p):

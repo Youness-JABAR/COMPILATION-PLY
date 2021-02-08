@@ -1,8 +1,25 @@
+
 a=1;
 b=3;
-kteb(a<b);
-madam(a<b)
+
+
+
+
+ila(2==1)
 {
-kteb("oui");
+kteb("non");
 }
+ola((3==3 wa 4==2) aw 2==1)
+{
+kteb("eee");
+}
+manghirdakchi
+{
+kteb("fffff");
+}
+
+
+
+
+
 

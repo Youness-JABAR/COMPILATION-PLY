@@ -46,6 +46,9 @@ tokens = [
     'KTERYUSSAWI',
     'YUSSAWI2',
     'MAKAYSSAWICH',
+
+    'WA',
+    'AW',
 ]
 
 
@@ -74,6 +77,8 @@ reserved = {
     'ghalat'  : 'GHALAT',                       #FALSE
     'walo'  : 'WALO',                           #NONE
     'msse7'  : 'MSSE7',                         #DEL
+    'wa'  : 'WA',                               #AND
+    'aw'  : 'AW',                               #OR
 }
 
 #the name following the t_ must exactly match one of the names supplied in tokens
@@ -133,6 +138,11 @@ t_MANGHIRDAKCHI = r'manghirdakchi'
 t_OLA = r'ola'
 t_ILA = r'ila'
 t_TUSSAWI = r'\='
+
+t_WA = r'wa'
+t_AW = r'aw'
+
+
 
 
 tokens =tokens +list(reserved.values())
