@@ -144,9 +144,20 @@ def p_loop_while(p):
             print(variables)
             break
     p[0] = ret
+#na9ISSSS------------------------------------------------
+precedence = (
+    ('left', 'ZA2ID', 'NA9ISS'),
+    ('left', 'DREB', '9SSEM'),
+    ('right', 'UMINUS'),            # Unary minus operator
+)
 
-
-
+def p_expr_uminus(p):
+    'RA9M_salib : NA9ISS RA9M %prec UMINUS'
+    p[0] = -p[2]
+def p_term_RA9M_salib(p):
+    'term : RA9M_salib'
+    p[0] = p[1]
+#FINNA9ISS-!-----------------------6------------
 
 def p_expression_paren(p):
     'expression : 7EL9AWESS expression SED9AWESS'
