@@ -1,24 +1,12 @@
 
-a=1;
-b=3;
-a+=1-2;
-kteb(a);
-
-
-ila(2==1){
-   kteb("ila1");
-    }
-ola(1==2){
-    kteb("ola 1");
-    }
-ola(1==2){
-    kteb("ola 1");
-    }
-ola(2==2){
-    kteb("weeeeeee");
+A=-4;
+B=3;
+kteb(A/B);
+ila(A/B>0){
+   kteb("POSITIF");
     }
 manghirdakchi{
-    kteb("ola 2");
+    kteb("NEGATIF");
     }
 
 

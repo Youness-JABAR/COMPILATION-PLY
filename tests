@@ -1,0 +1,23 @@
+#test 1
+A=1;
+B=3;
+ila(A>B){
+   kteb("A est superieur a B");
+    }
+ola(A<B){
+    kteb("A est inferieur a B");
+    }
+manghirdakchi{
+    kteb("A et B sont egaux");
+    }
+
+##########################################################################
+A=-4;
+B=3;
+kteb(A/B);
+ila(A/B>0){
+   kteb("POSITIF");
+    }
+manghirdakchi{
+    kteb("NEGATIF");
+    }

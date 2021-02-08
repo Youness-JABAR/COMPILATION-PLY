@@ -59,6 +59,10 @@ def p_assignement_decrementation(p):
     'assignement : ID N9ESSWA7ED NO9TAFASSILA'
     variables.update({p[1]: variables[p[1]] - 1})
 
+def p_printing(p):
+    'printing : KTEB 7EL9AWESS expression_string SED9AWESS NO9TAFASSILA'
+    p[0] = p[3]
+
 def p_expression_string(p):
     #'assignement : expression TUSSAWI expression| expression_string '
     ''' expression_string : expression
@@ -66,11 +70,8 @@ def p_expression_string(p):
                             | boolean'''
     p[0] = p[1]
 
-
-def p_printing(p):
-    'printing : KTEB 7EL9AWESS expression_string SED9AWESS NO9TAFASSILA'
-    p[0] = p[3]
-
+################################################## PARTIE IF ##############################"
+#racine elif
 def p_elif2(p):
     '''olas : olas ola
               | ola
@@ -80,12 +81,12 @@ def p_elif2(p):
     else:
         p[0] = p[1] + [p[2]]
 
-
+#elif
 def p_elif(p):
     'ola : OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA'
     if p[3]:
         p[0]=p[6]
-
+#if tanya elif else
 def p_elif3(p):
     'ola2 : OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA MANGHIRDAKCHI 7ELLAMA statements SEDLAMA'
     if p[3]:
@@ -124,6 +125,7 @@ def p_statement_else(p):
             p[0] = p[6]
         else:
             p[0] = p[8]
+################################################## FIN PARTIE IF ##############################"
 
 def p_statement_while(p):
     'statement : loop_while'
@@ -155,7 +157,7 @@ def p_expr_uminus(p):
     'RA9M_salib : NA9ISS RA9M %prec UMINUS'
     p[0] = -p[2]
 def p_term_RA9M_salib(p):
-    'term : RA9M_salib'
+    'factor : RA9M_salib'
     p[0] = p[1]
 #FINNA9ISS-!-----------------------6------------
 
@@ -163,8 +165,7 @@ def p_expression_paren(p):
     'expression : 7EL9AWESS expression SED9AWESS'
     p[0] = p[2]
 def p_expression_plus(p):
-    #'expression : RA9M ZA2ID RA9M'
-    'expression : expression ZA2ID term'
+    ' expression : expression ZA2ID term '
     p[0] = p[1] + p[3]
 
 def p_expression_minus(p):
@@ -176,32 +177,32 @@ def p_expression_term(p):
     p[0] = p[1]
 #MODULO
 def p_term_modulo(p):
-    'term : term BA9IL9ISSMA factor'
+    'term : term BA9IL9ISSMA term'
     p[0] = p[1] % p[3]
 
 def p_term_times(p):
-    'term : term DREB factor'
+    'term : term DREB term'
     p[0] = p[1] * p[3]
 
 def p_term_div(p):
-    'term : term 9SSEM factor'
+    'term : term 9SSEM term'
     if p[3] == 0:
         print("Can't divide by 0")
         raise ZeroDivisionError('integer division by 0')
     p[0] = p[1] / p[3]
 
+def p_term_factor(p):
+    '''term : factor
+
+            '''
+    p[0] = p[1]
 
 def p_term_ID(p):
     'term : ID'
     p[0] = variables[p[1]]
 
-def p_term_factor(p):
-    'term : factor'
-    p[0] = p[1]
 
-def p_factor_expr(p):
-    'factor : 7EL9AWESS expression SED9AWESS'
-    p[0] = p[2]
+
 
 def p_factor_num(p):
     'factor : RA9M'
