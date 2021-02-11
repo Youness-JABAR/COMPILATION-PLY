@@ -28,7 +28,8 @@ def p_statements(p):
 
 def p_statement(p):
     '''statement : assignement
-                | printing'''
+                   | printing
+                   | reading'''
     p[0] = p[1]
 
 def p_assignement(p):
@@ -364,6 +365,40 @@ def p_comparison(p):
             p[0] = variables[p[1]] <= variables[p[3]]
         else:
             p[0] = p[1] <= p[3]
+
+
+def p_command_for(p):
+    '''statement : LIKUL 7EL9AWESS ID TUSSAWI expression TO expression FASSILA STEP TUSSAWI expression SED9AWESS 7ELLAMA statements SEDLAMA'''
+   # p[0] = ('likul', p[3], p[5], p[7], p[10])
+
+
+    if p[7] > p[5]:
+        i = 0
+        while i < p[7]-p[5]:
+            p[0]=p[14]
+            #print(p[14])
+            i = i+int(p[11])
+    else:
+        print("erreur index")
+
+def p_command_for_nostep(p):
+    '''statement : LIKUL 7EL9AWESS ID TUSSAWI expression TO expression SED9AWESS 7ELLAMA statements SEDLAMA'''
+# p[0] = ('likul', p[3], p[5], p[7], p[10])
+    if p[7] > p[5]:
+         for i in range(p[7]-p[5]):
+             print(p[10])
+
+    else:
+          print("erreur index")
+
+
+
+
+def p_empty(p):
+    '''empty : '''
+
+
+
 
 # Error rule for syntax errors
 def p_error(p):

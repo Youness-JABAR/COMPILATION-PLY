@@ -49,11 +49,16 @@ tokens = [
 
     'WA',
     'AW',
+    'STEP',
+    'TO',
+    'LIKUL',
+    '9RA'
 ]
 
 
 reserved = {
     'ila' : 'ILA',                              #IF
+    '9ra' : '9RA',                              #IF
     'idan' : 'IDAN',                            #then
     'ola' : 'OLA',                              #if else
     'manghirdakchi' : 'MANGHIRDAKCHI',           #else
@@ -79,6 +84,11 @@ reserved = {
     'msse7'  : 'MSSE7',                         #DEL
     'wa'  : 'WA',                               #AND
     'aw'  : 'AW',                               #OR
+    'step'  : 'STEP',
+    'to'  : 'TO',
+
+
+
 }
 
 #the name following the t_ must exactly match one of the names supplied in tokens
@@ -105,6 +115,9 @@ t_JUJNO9AT            = r':'
 
 t_MSSE7    = r'msse7'
 t_WALO    = r'walo'
+t_STEP    = r'step'
+t_TO    = r'to'
+t_9RA    = r'9ra'
 
 t_SENF    = r'senf'
 t_CHED    = r'ched'

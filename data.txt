@@ -1,11 +1,4 @@
-#hhhhh
-x=0;
-x+=1;
-kteb(x);
-#kteb(x);
-ila(x==1){
-    kteb(x;
-    }
+
 
 
 
