@@ -1,6 +1,14 @@
+<<<<<<< Updated upstream
 
 
 
+=======
+kteb("xxx");
+kteb("ccc");
+likul(j=0 tal 5){
+    kteb("aaaaa");
+}
+>>>>>>> Stashed changes
 
 
 
