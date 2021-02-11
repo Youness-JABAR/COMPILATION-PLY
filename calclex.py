@@ -49,13 +49,8 @@ tokens = [
 
     'WA',
     'AW',
-<<<<<<< Updated upstream
-    'STEP',
-    'TO',
-=======
     'KHETWA',
     'TAL',
->>>>>>> Stashed changes
     'LIKUL',
     '9RA'
 ]
@@ -89,13 +84,8 @@ reserved = {
     'msse7'  : 'MSSE7',                         #DEL
     'wa'  : 'WA',                               #AND
     'aw'  : 'AW',                               #OR
-<<<<<<< Updated upstream
-    'step'  : 'STEP',
-    'to'  : 'TO',
-=======
     'khetwa'  : 'KHETWA',
     'tal'  : 'TAL',
->>>>>>> Stashed changes
 
 
 
@@ -125,13 +115,8 @@ t_JUJNO9AT            = r':'
 
 t_MSSE7    = r'msse7'
 t_WALO    = r'walo'
-<<<<<<< Updated upstream
-t_STEP    = r'step'
-t_TO    = r'to'
-=======
 t_KHETWA    = r'khetwa'
 t_TAL   = r'tal'
->>>>>>> Stashed changes
 t_9RA    = r'9ra'
 
 t_SENF    = r'senf'
