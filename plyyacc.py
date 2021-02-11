@@ -201,6 +201,71 @@ def p_term_RA9M_salib(p):
     'factor : RA9M_salib'
     p[0] = p[1]
 #FINNA9ISS-!-----------------------6------------
+#tableau----------------------------------------
+def p_assignement_change_element_array(p):
+    ' assignement : change_element_array '
+    p[0] = p[1]
+
+def p_change_element_array(p):
+    ''' change_element_array : ID array_index TUSSAWI element NO9TAFASSILA
+                                | ID array_index array_index TUSSAWI element NO9TAFASSILA
+    '''
+    if(len(p)==6):
+        print(variables[p[1]][p[2]])
+        variables[p[1]][p[2]]=p[4]
+    else:
+        variables[p[1]][p[2]][p[3]]=p[5]
+
+
+def p_array_index(p):
+    ' array_index : 7ELM39UFA expression SEDM39UFA'
+    p[0] = p[2]
+def p_element_return(p):
+    ''' expression_string : ID array_index
+                            | ID  array_index array_index
+    '''
+    if(len(p)==3):
+        p[0] = variables[p[1]][p[2]]
+    else:
+
+        p[0] = variables[p[1]][p[2]][p[3]]
+
+
+def p_element_exp_str(p):
+    ''' element : expression_string
+                | array_content
+    '''
+    p[0] = p[1]
+def p_elements(p):
+    ''' elements : element FASSILA elements
+                    | element
+    '''
+    ret=[]
+    if (len(p) == 2):
+        ret.append(p[1])
+    else:
+        ret.append(p[1])
+        ret.extend(p[3])
+
+    p[0] = ret
+def p_assignement_array(p):
+    ' assignement : array'
+    p[0] = p[1]
+
+def p_array_content(p):
+    ' array_content : 7ELM39UFA elements SEDM39UFA'
+    p[0] = p[2]
+def p_array(p):
+    ''' array : ID TUSSAWI 7ELM39UFA SEDM39UFA NO9TAFASSILA
+        | ID TUSSAWI array_content NO9TAFASSILA
+    '''
+    if(len(p)==6):
+        variables.update({p[1]: []})
+    else:
+
+        variables.update({p[1]: p[3]})
+
+
 
 def p_expression_paren(p):
     'expression : 7EL9AWESS expression SED9AWESS'
@@ -411,9 +476,11 @@ while True:
     if not tok:
         break      # No more input
     print(tok)'''
-for r in result:
-    if r == None:
-        continue;
-    else:
-        print(r)
+if result is not None:
+    for r in result:
+        if r == None:
+            continue;
+        else:
+            print(r)
+
 
