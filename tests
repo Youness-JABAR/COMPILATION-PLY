@@ -21,3 +21,9 @@ ila(A/B>0){
 manghirdakchi{
     kteb("NEGATIF");
     }
+
+#############################################################################
+x=13;
+resultat=x+2;
+resultat=resultat*2;
+kteb(resultat);

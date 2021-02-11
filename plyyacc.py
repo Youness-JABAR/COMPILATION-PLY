@@ -35,33 +35,68 @@ def p_assignement(p):
     'assignement : ID TUSSAWI expression_string NO9TAFASSILA'
     variables.update({p[1] : p[3]})
 
+def p_assignement_error(p):
+    'assignement : ID TUSSAWI expression_string error'
+    print("Khass tkemel b ; f ster %s%s%s !!!." % (p[1], p[2], p[3]))
+
 def p_assignement_plusaff(p):
     'assignement : ID ZIDFIH expression NO9TAFASSILA'
     variables.update({p[1]: variables[p[1]] + p[3]})
+
+def p_assignement_plusaff_error(p):
+    'assignement : ID ZIDFIH expression error'
+    print("Khass tkemel b ; f ster %s%s%s !!!." % (p[1], p[2], p[3]))
 
 def p_assignement_moinsaff(p):
     'assignement : ID N9ESSFIH expression NO9TAFASSILA'
     variables.update({p[1]: variables[p[1]] - p[3]})
 
+def p_assignement_moinsaff_error(p):
+    'assignement : ID N9ESSFIH expression error'
+    print("Khass tkemel b ; f ster %s%s%s !!!." % (p[1], p[2], p[3]))
+
 def p_assignement_timessaff(p):
     'assignement : ID DREBFIH expression NO9TAFASSILA'
     variables.update({p[1]: variables[p[1]] * p[3]})
 
+def p_assignement_timessaff_error(p):
+    'assignement : ID DREBFIH expression error'
+    print("Khass tkemel b ; f ster %s%s%s !!!." % (p[1], p[2], p[3]))
+
 def p_assignement_divsaff(p):
     'assignement : ID 9SSEMFIH expression NO9TAFASSILA'
-    variables.update({p[1]: variables[p[1]] / p[3]})
+    variables.update({p[1]: variables[p[1]] * p[3]})
+
+def p_assignement_divsaff_error(p):
+    'assignement : ID 9SSEMFIH expression error'
+    print("Khass tkemel b ; f ster %s%s%s !!!." % (p[1], p[2], p[3]))
 
 def p_assignement_incrementation(p):
     'assignement : ID ZIDWA7ED NO9TAFASSILA'
     variables.update({p[1]: variables[p[1]] + 1})
 
+def p_assignement_incrementation_error(p):
+    'assignement : ID ZIDWA7ED error'
+    print("Khass tkemel b ; f ster %s%s !!!." % (p[1], p[2]))
+
 def p_assignement_decrementation(p):
     'assignement : ID N9ESSWA7ED NO9TAFASSILA'
     variables.update({p[1]: variables[p[1]] - 1})
 
+def p_assignement_decrementation_error(p):
+    'assignement : ID N9ESSWA7ED error'
+    print("Khass tkemel b ; f ster %s%s !!!." % (p[1], p[2]))
+
 def p_printing(p):
     'printing : KTEB 7EL9AWESS expression_string SED9AWESS NO9TAFASSILA'
     p[0] = p[3]
+
+def p_printing_error(p):
+    'printing : KTEB 7EL9AWESS expression_string SED9AWESS error'
+    print("Khass tkemel b ; f ster %s  !!!." % (p[1]))
+def p_printing_error(p):
+    'printing : KTEB 7EL9AWESS expression_string error NO9TAFASSILA'
+    print("Khass tssed l9awess  f ster %s  !!!." % (p[1]))
 
 def p_expression_string(p):
     #'assignement : expression TUSSAWI expression| expression_string '
@@ -69,6 +104,10 @@ def p_expression_string(p):
                             | STRING
                             | boolean'''
     p[0] = p[1]
+
+def p_string(p):
+    '''string : STRING
+                '''
 
 ################################################## PARTIE IF ##############################"
 #racine elif
@@ -86,6 +125,8 @@ def p_elif(p):
     'ola : OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA'
     if p[3]:
         p[0]=p[6]
+
+
 #if tanya elif else
 def p_elif3(p):
     'ola2 : OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA MANGHIRDAKCHI 7ELLAMA statements SEDLAMA'
@@ -106,7 +147,6 @@ def p_statement_if(p):
             p[0] = p[6]
         else:
             p[0] = p[8]
-
 
 def p_statement_else(p):
     '''statement : ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA MANGHIRDAKCHI 7ELLAMA statements SEDLAMA
@@ -187,13 +227,13 @@ def p_term_times(p):
 def p_term_div(p):
     'term : term 9SSEM term'
     if p[3] == 0:
-        print("Can't divide by 0")
-        raise ZeroDivisionError('integer division by 0')
-    p[0] = p[1] / p[3]
+        print('Maymkench l9issma 3la 0!!!.')
+        raise ZeroDivisionError('Maymkench l9issma 3la 0!!!.')
+    else:
+        p[0] = p[1] / p[3]
 
 def p_term_factor(p):
     '''term : factor
-
             '''
     p[0] = p[1]
 
@@ -327,7 +367,7 @@ def p_comparison(p):
 
 # Error rule for syntax errors
 def p_error(p):
-    print("Syntax error in input!")
+    print("Khata2 f ktaba !!!")
 
 # Build the parser
 parser = yacc.yacc()
