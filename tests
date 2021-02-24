@@ -2,13 +2,13 @@
 A=1;
 B=3;
 ila(A>B){
-   kteb("A est superieur a B");
+   kteb("A kber mn B");
     }
 ola(A<B){
-    kteb("A est inferieur a B");
+    kteb("A sgher mn B");
     }
 manghirdakchi{
-    kteb("A et B sont egaux");
+    kteb("A w B mtssawin");
     }
 
 ##########################################################################
@@ -16,17 +16,17 @@ A=-4;
 B=3;
 kteb(A/B);
 ila(A/B>0){
-   kteb("POSITIF");
+   kteb("MOJAB");
     }
 manghirdakchi{
-    kteb("NEGATIF");
+    kteb("SALIB");
     }
 
 #############################################################################
 x=13;
-resultat=x+2;
-resultat=resultat*2;
-kteb(resultat);
+natija=x+2;
+natija=natija*2;
+kteb(natija);
 ####################################################################################
 A=-4;
 B=6;
@@ -37,8 +37,57 @@ C++;
 kteb(C);
 kteb(A/B);
 ila(A/B>0){
-   kteb("POSITIF");
+   kteb("MOJAB");
     }
 manghirdakchi{
-    kteb("NEGATIF");
+    kteb("SALIB");
     }
+########################################################################################################################################################################
+age=4;
+ila(age>0 wa age<10 )
+{
+    kteb("l3mer sgher mn 10 snin");
+}
+ola(age>0 wa age<30 )
+{
+    kteb("l3mer bin 10 o 30 sna");
+}
+ola(age>30 wa age<100 )
+{
+    kteb("l3mer bin 30 o 50 sna");
+}
+manghirdakchi
+{
+    kteb("lakan mumkin dkhel sin oykun m39ul :) ");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##################### does work properly#####################################"
+a=0;
+madam(a==0){
+
+a=a+1;
+kteb(a);
+}

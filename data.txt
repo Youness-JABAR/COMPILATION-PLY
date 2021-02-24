@@ -1,10 +1,14 @@
-t=[[1,2],[1,"anaaa"]];
-t[1][0]="ntAA";
-kteb(t[1]);
-
-
-
-
-
-
-
+A=-4;
+B=6;
+B=4+2;
+kteb(B);
+C=5;
+C++;
+kteb(C);
+kteb(A/B);
+ila(A/B>0){
+   kteb("MOJAB");
+    }
+manghirdakchi{
+    kteb("SALIB");
+    }

@@ -1,3 +1,6 @@
+#
+#
+
 #a regular language, a language that is recognizable by a finite automaton and formally expressible using regular expressions
 
 
@@ -112,81 +115,95 @@ def p_string(p):
                 '''
 
 ################################################## PARTIE IF ##############################"
-#racine elif
-def p_elif2(p):
-    '''olas : olas ola
-              | ola
-              | olas ola2'''
-    if len(p) == 2:
-        p[0] = [p[1]]
-    else:
-        p[0] = p[1] + [p[2]]
+def p_else(p):
+    'else : MANGHIRDAKCHI 7ELLAMA statements SEDLAMA'
+    p[0]=p[3]
 
-#elif
 def p_elif(p):
-    'ola : OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA'
+    'elif : OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA'
     if p[3]:
         p[0]=p[6]
 
-
-#if tanya elif else
-def p_elif3(p):
-    'ola2 : OLA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA MANGHIRDAKCHI 7ELLAMA statements SEDLAMA'
-    if p[3]:
-        p[0]=p[6]
+def p_much_elif(p):
+    '''elifs : elifs elif
+              | elif
+              '''
+    if len(p) == 2:
+        p[0] = p[1]
     else:
-        p[0]=p[10]
+        if p[1] is None :
+            p[0] = p[2]
+        elif p[2] is None :
+            p[0] = p[1]
+        else:
+            p[0] = p[1] + [p[2]]
+
+
+
+
+def p_if(p):
+    '''if : ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA
+                   '''
+    if p[3]:
+        p[0] = p[6]
 
 def p_statement_if(p):
-    '''statement : ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA
-                   | ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA olas
+    '''statement :  if
+                   | if elifs
+                   | if elifs else
                    '''
-    if len(p) == 8:
-        if p[3]:
-            p[0] = p[6]
-    else:
-        if p[3]:
-            p[0] = p[6]
-        else:
-            p[0] = p[8]
+    if len(p) == 2:
+        p[0] = p[1]
 
-def p_statement_else(p):
-    '''statement : ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA MANGHIRDAKCHI 7ELLAMA statements SEDLAMA
-                | ILA 7EL9AWESS booleans SED9AWESS 7ELLAMA statements SEDLAMA ola2
-                 '''
+    elif len(p) == 3:
+        if p[1] is not None and p[2] is None:
+            p[0] = p[1]
+        elif p[1] is None and p[2] is not None:
+            p[0] = p[2]
+        elif p[1] is not None and p[2] is not None:
+            p[0] = p[1] + [p[2]]
 
-    if len(p) == 12:
-        if p[3]:
-            p[0] = p[6]
+    elif len(p) == 4:
+        if p[1] is not None and p[2] is None:
+            p[0] = p[1]
+        elif p[1] is None and p[2] is not None :
+            p[0] = p[2]
+        elif p[1] is not None and p[2] is not None :
+            p[0] = p[1] + [p[2]]
+        else :   #p[1] is None and p[2] is None
+            p[0] = p[3]
 
-        else:
-            if p[10] is not None:
-                p[0] = p[10]
-    else:
-        if p[3]:
-            p[0] = p[6]
-        else:
-            p[0] = p[8]
+def p_statement_if_else(p):
+    '''statement :  if else
+                   '''
+    if p[1] is not None :
+        p[0] = p[1]
+    else:  # p[1] is None
+        p[0] = p[2]
 ################################################## FIN PARTIE IF ##############################"
 
 def p_statement_while(p):
     'statement : loop_while'
     p[0]=p[1]
+def p_condLoop_while(p):
+    'condLoop : 7EL9AWESS boolean SED9AWESS'
+    p[0]=p[2]
 
 def p_loop_while(p):
-    'loop_while : MADAM 7EL9AWESS boolean SED9AWESS 7ELLAMA statements  SEDLAMA'
+    'loop_while : MADAM condLoop 7ELLAMA statements  SEDLAMA'
 
     i=0
     ret=[]
-    while(p[3]):
-        #print("true")
-        ret.append(p[6])
+    while (p[2]):
+        ret.append(p[4])
         i=i+1
-        if (i==10):
+        if (i == 100):
             print("ereur : boucle infini")
             print(variables)
             break
     p[0] = ret
+
+
 #na9ISSSS------------------------------------------------
 precedence = (
     ('left', 'ZA2ID', 'NA9ISS'),
@@ -456,6 +473,14 @@ def p_command_for_nostep(p):
     else:
           print("erreur index")
 
+
+def p_command_read2(p):
+    '''assignement : reading'''
+    p[0] = p[1]
+def p_command_read(p):
+    '''reading : ID TUSSAWI DKHEL 7EL9AWESS SED9AWESS NO9TAFASSILA'''
+    var = input()
+    variables.update({p[1]: var})
 # Error rule for syntax errors
 def p_error(p):
     print("Khata2 f ktaba !!!")
@@ -469,7 +494,7 @@ file_handle=open(filename,"r")
 file_contents=file_handle.read()
 result = parser.parse(file_contents)
 # Tokenize
-'''calclex.lexer.input(file_contents)
+'''calclex.lexer.input(file_contents)d
 while True:
     # lexer.token() :Returns a special LexToken instance on success or None if the end of the input text has been reached.
     tok =calclex.lexer.token()
